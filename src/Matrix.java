@@ -31,10 +31,13 @@ public class Matrix extends Thread {
   @Override 
   public void run() {
 
-    // CHANGE THIS
-    for (int i = iMin; i < iMax; ++i) {
-      for (int j = jMin; j < jMax; ++j) {
+    // matrix multiplication
+    for (int i = iMin; i < iMax; ++i) {                                //i = row
+      for (int j = jMin; j < jMax; ++j) {                              //j = column
         resultMatrix[i][j] = 0;
+        for (int k = iMin; k < jMax; ++k){                             //k matches kth element in ith row to kth element in jth column
+          resultMatrix [i][j] += A[i][k] * B[k][j];                    //+= computes the sum [i][1]*[1][j] + [i][2]*[2][j] [i][3]*[3][j] + ...
+        }
       }
     }
 
