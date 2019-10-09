@@ -2,7 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b83a0f91-849c-4657-b52d-20a46fcd4ca2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Program.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Labs/CalcMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Labs/CalcMain.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Labs/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Labs/Calculator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/CalcMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalcMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,6 +28,9 @@
   </component>
   <component name="ProjectId" id="1Qyfx4xej7FPkFzuHTgRnxirUJO" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -66,7 +75,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
