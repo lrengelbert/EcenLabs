@@ -2,8 +2,8 @@ public class MatrixMain {
   public static void main(String[] args) {
 
     // initialize a couple of 20x20 matrices
-    float[][] resA = MatrixLoader.getIdentityMatrixMxN(20, 20);
-    float[][] resB = MatrixLoader.getStructuredMatrixMxN(20, 20, 0, 0, 1);
+    float[][] resA = MatrixLoader.getRandomMatrixMxN(20, 20,   0,  0,  1);
+    float[][] resB = MatrixLoader.getRandomMatrixMxN(20, 20,   0,  0,  1);
     System.out.println("Matrix A");
     MatrixLoader.printMatrix(resA);
     System.out.println("Matrix B");
