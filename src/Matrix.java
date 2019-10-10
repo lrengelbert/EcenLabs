@@ -35,7 +35,7 @@ public class Matrix extends Thread {
     for (int i = iMin; i < iMax; ++i) {                                //i = row
       for (int j = jMin; j < jMax; ++j) {                              //j = column
         resultMatrix[i][j] = 0;
-        for (int k = iMin; k < jMax; ++k){                             //k matches kth element in ith row to kth element in jth column
+        for (int k = 0; k < A[0].length; ++k){                             //k matches kth element in ith row to kth element in jth column
           resultMatrix [i][j] += A[i][k] * B[k][j];                    //+= computes the sum [i][1]*[1][j] + [i][2]*[2][j] [i][3]*[3][j] + ...
         }
       }
