@@ -37,11 +37,11 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Server {
+public class AServer {
   public static void main(String[] args) throws IOException {
 
     if (args.length != 1) {
-      System.err.println("Usage: java KnockKnockServer <port number>");
+      System.err.println("Usage: AServer <port number>");
       System.exit(1);
     }
 
@@ -55,12 +55,12 @@ public class Server {
       String inputLine, outputLine;
 
       // Initiate conversation with client
-      KnockKnockProtocol kkp = new KnockKnockProtocol();
-      outputLine = kkp.processInput(null);
+      ServerProtocol sp = new ServerProtocol();
+      outputLine = sp.processInput(null);
       out.println(outputLine);
 
       while ((inputLine = in.readLine()) != null) {
-        outputLine = kkp.processInput(inputLine);
+        outputLine = sp.processInput(inputLine);
         out.println(outputLine);
         if (outputLine.equals("Bye."))
           break;
