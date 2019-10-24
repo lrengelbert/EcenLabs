@@ -45,6 +45,13 @@ public class AServer {
       System.exit(1);
     }
 
+    String msg = "Welcome to server";
+    if (args.length == 3) {
+      msg = args[2];
+    }
+
+    System.out.println("msg: " + msg);
+
     int portNumber = Integer.parseInt(args[0]);
 
     try (ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -55,7 +62,7 @@ public class AServer {
       String inputLine, outputLine;
 
       // Initiate conversation with client
-      ServerProtocol sp = new ServerProtocol();
+      ServerProtocol sp = new ServerProtocol(msg);
       outputLine = sp.processInput(null);
       out.println(outputLine);
 
