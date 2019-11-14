@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b83a0f91-849c-4657-b52d-20a46fcd4ca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Program.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/MP3/ServerProtocol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Labs/CalcMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Labs/CalcMain.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Labs/Calculator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Labs/Calculator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CalcMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CalcMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Calculator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Calculator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MP3/KnockKnockProtocol.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MP3/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MP3/AServer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +27,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/MP3" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -43,19 +41,39 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="CalcMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="CalcMain" />
+  <component name="RunManager" selected="Application.Client">
+    <configuration name="AServer" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AServer" />
       <module name="Labs" />
+      <option name="PROGRAM_PARAMETERS" value="4444" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/MP3" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.CalcMain" />
-      </list>
-    </recent_temporary>
+    <configuration name="Client" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="Client" />
+      <module name="Labs" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 4444" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ServerClient" type="CompoundRunConfigurationType">
+      <toRun name="Server" type="Application" />
+      <toRun name="Client" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="CompoundRunConfigurationType">
+      <toRun name="Server" type="Application" />
+      <toRun name="Client" type="Application" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Application.Client" />
+      <item itemvalue="Application.AServer" />
+      <item itemvalue="Compound.ServerClient" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
