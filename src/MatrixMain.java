@@ -7,18 +7,33 @@ public class MatrixMain {
     // float[][] resB = MatrixLoader.getIdentityMatrixMxN(20, 20);
     // float[][] resA = MatrixLoader.getStructuredMatrixMxN(20, 20, 0, 0, 1);
 
-    float[][] resA = MatrixLoader.getRandomMatrixMxN(20, 20, 0, 0, 1);
-    float[][] resB = MatrixLoader.getRandomMatrixMxN(20, 20, 0, 0, 1);
+
+
+    int m = 20;
+    int p = 20;
+    int n = 20;
+    float[][] resA = MatrixLoader.getRandomMatrixMxN(m, p, 0, 0, 1);
+    float[][] resB = MatrixLoader.getRandomMatrixMxN(p, n, 0, 0, 1);
+
+    int nThreads = 5;
+
+    if (args.length >= 1) {
+      nThreads = Integer.parseInt(args[0]);
+    }
+    if (args.length >= 2 && args[1].equals("-i")) {
+      // resA = MatrixLoader.getIdentityMatrixMxN(m, p);
+      resA = MatrixLoader.getStructuredMatrixMxN(20, 20, 0, 0, 1);
+      // resB = MatrixLoader.getRandomMatrixMxN(p, n, 0, 0, 1);
+      resB = MatrixLoader.getIdentityMatrixMxN(m, p);
+    }
+
     System.out.println("Matrix A");
     MatrixLoader.printMatrix(resA);
     System.out.println("Matrix B");
     MatrixLoader.printMatrix(resB);
 
-    // set the matrices to be used for all Matrix instances / threads 
     Matrix.setMatrices(resA, resB);
 
-    // create single thread for now 
-    int nThreads = 5;
     List<Thread> threads = new ArrayList<Thread>();
 
     if (nThreads > resA.length) {
