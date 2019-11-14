@@ -24,7 +24,7 @@ public class KKMultiServerThread extends Thread {
       ServerProtocol kkp = new ServerProtocol(welcomeMsg);
       outputLine = kkp.processInput(null);
       out.println(outputLine);
-      System.out.println("initial: " + outputLine);
+      // System.out.println("initial: " + outputLine);
 
       while ((inFromClient = buffInFromClient.readLine()) != null) {
         // while (buffInFromClient.ready() || buffInFromStdin.ready()) {
