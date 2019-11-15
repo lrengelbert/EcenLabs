@@ -8,7 +8,8 @@ JC = javac
 
 CLASSES = \
   DatagramServer.java \
-	DatagramClient.java
+	DatagramClient.java \
+	Talker.java
 
 default: classes
 

@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.Random;
 
 /**
  * A simple datagram server Shows how to send and receive UDP packets in Java
@@ -13,6 +14,8 @@ public class DatagramServer {
       System.out.println("usage: DatagramServer port");
       return;
     }
+
+    Random rand = new Random();
 
     try {
       // Convert the argument to ensure that is it valid
@@ -31,15 +34,71 @@ public class DatagramServer {
         socket.receive(packet);
 
         // Print the packet
-        System.out.println(packet.getAddress() + " " + packet.getPort() + ": " + new String(packet.getData()));
+        System.out.println(
+            packet.getAddress() + " " + packet.getPort() + ": received packet 0: " + new String(packet.getData()));
+
+        socket.send(packet);
+
+        String strnPackets = new String(packet.getData()).trim();
+        // System.out.println("str n pack: " + strnPackets + " len: " +
+        // strnPackets.length());
+        // System.out.println("matches: " + strnPackets.matches("-?\\d+(\\.\\d+)?"));
+        int nPackets = Integer.parseInt(strnPackets);
+        System.out.println("n packets to be received: " + nPackets);
+
+        boolean allReceived = false;
+
+        String[] str_message = new String[nPackets];
+
+        int i = 0;
+        while (!allReceived) {
+          packet = new DatagramPacket(new byte[PACKETSIZE], PACKETSIZE);
+          socket.receive(packet);
+
+          // socket.send(packet);
+          int r = rand.nextInt(2);
+          if (r == 1) {
+            System.out.println(packet.getAddress() + " " + packet.getPort() + ": " + "received packet " + (i + 1) + ": "
+                + new String(packet.getData()));
+            // System.out.println("Sending ACK");
+            byte[] msg = Integer.toString(i + 1).getBytes();
+            DatagramPacket serverToClientACK = new DatagramPacket(msg, msg.length, packet.getAddress(),
+                packet.getPort());
+
+            socket.send(serverToClientACK);
+            str_message[i] = new String(packet.getData());
+            i += 1;
+          } else {
+            System.out.println("Dropping packet");
+          }
+
+          if (i >= nPackets) {
+            System.out.println("Finished receiving!");
+            allReceived = true;
+          }
+
+        }
+
+        System.out.println("Final message: ");
+        for (int j = 0; j < nPackets; j++) {
+          System.out.print(str_message[j]);
+        }
+        System.out.println();
 
         // Return the packet to the sender
-        // socket.send( packet ) ;
-      }
-    }catch(
+        // int r = rand.nextInt(2);
+        // if (r == 1) {
+        // System.out.println("ACK sent");
+        // socket.send(packet);
+        // } else {
+        // System.out.println("ACK dropped");
+        // }
 
-  Exception e)
-  {
-    System.out.println(e);
+      }
+    } catch (
+
+    Exception e) {
+      System.out.println(e);
+    }
   }
-}}
+}
