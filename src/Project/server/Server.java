@@ -53,12 +53,14 @@ public class Server {
   private static class GameThread implements Runnable {
     private Socket socket;
 
+    private Scanner in;
+
+    private PrintWriter out;
+
     private Room room;
 
     public PLAYER player_id;
     public int room_no;
-
-    public boolean my_turn = false;
 
     public boolean print_wait = false;
 
@@ -72,15 +74,16 @@ public class Server {
       this.socket = socket;
       this.room = room;
       this.room_no = -1;
+
     }
 
     @Override
     public void run() {
       System.out.println("Connected: " + socket);
       try {
-        Scanner in = new Scanner(socket.getInputStream());
+        in = new Scanner(socket.getInputStream());
 
-        PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
+        out = new PrintWriter(socket.getOutputStream(), true);
 
         while (gameLoop(in, out)) {
 
@@ -113,8 +116,11 @@ public class Server {
 
       if (playersToRoomsMap.containsKey(socket)) {
         // already connected
+
         if (room.boards[playersToRoomsMap.get(socket)].getTurn() == player_id) {
+          room.boards[playersToRoomsMap.get(socket)].sendBoard(out);
           out.println("Enter number 0-8 for move");
+
           // int board_pos = in.nextInt();
           // boolean isValid = checkValidMove(board_pos);
           // while (!isValid) {
@@ -125,14 +131,21 @@ public class Server {
           do {
             board_pos = in.nextInt();
             isValid = room.boards[playersToRoomsMap.get(socket)].checkValidMove(board_pos);
+
+            if (!isValid) {
+              out.println("A piece has been placed there, try again");
+              room.boards[playersToRoomsMap.get(socket)].sendBoard(out);
+            }
           } while (!isValid);
           room.boards[playersToRoomsMap.get(socket)].updateBoard(board_pos, player_id);
+          room.boards[playersToRoomsMap.get(socket)].sendBoard(out);
           // my_turn = false;
           room.boards[playersToRoomsMap.get(socket)].nextTurn(player_id);
           print_wait = true;
 
         } else if (room.boards[playersToRoomsMap.get(socket)].getTurn() == Server.PLAYER.NONE) {
           if (print_wait) {
+            room.boards[playersToRoomsMap.get(socket)].sendBoard(out);
             out.println("Waiting for an opponent to connect...");
             print_wait = false;
           }

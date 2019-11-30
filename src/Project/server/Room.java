@@ -1,6 +1,7 @@
 // import Project.server.Server.PLAYER;
 
 // import Project.server.Server.*;
+import java.io.PrintWriter;
 
 public class Room {
 
@@ -94,6 +95,15 @@ public class Room {
           System.out.print(board[i][j] + " ");
         }
         System.out.println();
+      }
+    }
+
+    public void sendBoard(PrintWriter out) {
+      for (int i = 0; i < board.length; ++i) {
+        for (int j = 0; j < board[i].length; ++j) {
+          out.print(board[i][j] + " ");
+        }
+        out.println();
       }
     }
 
