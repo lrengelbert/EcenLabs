@@ -89,7 +89,6 @@ public class TTTServer {
     public void connectToGame() {
       out.println("Enter a room number");
       int game_num = in.nextInt();
-      System.out.println("GOT INT" + game_num);
       GameHandler.RoomMessage message = gameHandler.checkGame(game_num);
       handleRoomMessage(message, game_num);
     }
@@ -152,7 +151,6 @@ public class TTTServer {
       }
 
       System.out.println("HandleRoomMessage: " + message);
-      System.out.println("myGame: " + myGame);
       System.out.println("myPiece: " + myPiece);
     }
 
@@ -297,19 +295,13 @@ public class TTTServer {
 
     public GameHandler.PIECE addPlayer() {
       // first player
-      System.out.println("addPLyaer: " + playerCount);
-      System.out.println(playerOTurn);
-      System.out.println(playerXTurn);
+
       GameHandler.PIECE newPlayerPiece = GameHandler.PIECE.N;
       if (playerCount == 0) {
         newPlayerPiece = GameHandler.PIECE.O;
       } else if (playerCount == 1) {
         newPlayerPiece = GameHandler.PIECE.X;
-        System.out.println("Releasing");
-        System.out.println(playerOTurn);
-        System.out.println("permits: " + playerOTurn.availablePermits());
         playerOTurn.release();
-        System.out.println("Released");
 
       } else {
         System.out.println("ERROR in adding player");
