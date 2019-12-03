@@ -118,10 +118,11 @@ public class TTTServer {
         System.out.println("Valid move made!");
         myGame.makeMove(board_pos, myPiece);
         boolean gameOver = myGame.checkWin();
-        if (gameOver){
-          System.out.println("GAME OVER");
-        }
+
         myGame.sendBoard(out);
+        if (gameOver) {
+          myGame.broadCastWin();
+        }
 
       } catch (InterruptedException intEx) {
         System.out.println(intEx);
@@ -149,8 +150,10 @@ public class TTTServer {
 
       if (message == GameHandler.RoomMessage.PLAYER_O) {
         myPiece = GameHandler.PIECE.O;
+        myGame.playerOout = out;
       } else if (message == GameHandler.RoomMessage.PLAYER_X) {
         myPiece = GameHandler.PIECE.X;
+        myGame.playerXout = out;
       }
 
       System.out.println("HandleRoomMessage: " + message);
@@ -240,8 +243,8 @@ public class TTTServer {
     Semaphore playerXTurn;
     public int playerCount;
 
-    PrintWriter playerOout;
-    PrintWriter playerXout;
+    public PrintWriter playerOout;
+    public PrintWriter playerXout;
 
     public int roomNumber;
 
@@ -302,6 +305,7 @@ public class TTTServer {
       GameHandler.PIECE newPlayerPiece = GameHandler.PIECE.N;
       if (playerCount == 0) {
         newPlayerPiece = GameHandler.PIECE.O;
+
       } else if (playerCount == 1) {
         newPlayerPiece = GameHandler.PIECE.X;
         playerOTurn.release();
@@ -328,43 +332,72 @@ public class TTTServer {
       }
     }
 
-    public boolean checkWin(){
-      int[][] winCombos ={{0, 1, 2},    //winning horizontally
-              {3, 4, 5},
-              {6, 7, 8},
-              {0, 3, 6},				//winning vertically
-              {1, 4, 7},
-              {2, 5, 8},
-              {0, 4, 8},				//winning diagonally
-              {6, 4, 2}};
+    public boolean checkWin() {
+      int[][] winCombos = { { 0, 1, 2 }, // winning horizontally
+          { 3, 4, 5 }, { 6, 7, 8 }, { 0, 3, 6 }, // winning vertically
+          { 1, 4, 7 }, { 2, 5, 8 }, { 0, 4, 8 }, // winning diagonally
+          { 6, 4, 2 } };
 
-      boolean[] boardXArray = {false, false, false, false, false, false, false, false};
-      boolean[] boardOArray = {false, false, false, false, false, false, false, false};
       boolean gameWon = false;
-      for (int i = 0 ; i < 9; ++i){
-
-        int q = 0;
-        for (int j = 0 ; j < 3; ++j){
-          for (int k = 0; k < 3; ++k){
-            if (board[j][k].equals("X")){
-              boardXArray[q] = true;
-            }
-            else if(board[j][k].equals("O")){
-              boardOArray[q] = true;
-            }
-            q = q + 1;
+      for (int i = 0; i < 2; ++i) {
+        for (int j = 0; j < winCombos.length; ++j) {
+          GameHandler.PIECE currPiece;
+          if (i == 0) {
+            currPiece = GameHandler.PIECE.X;
+          } else {
+            currPiece = GameHandler.PIECE.O;
           }
+          boolean won = true;
+          // System.out.println("*************************************");
+          for (int k = 0; k < winCombos[j].length; ++k) {
+            int x = winCombos[j][k] / 3;
+            int y = winCombos[j][k] % 3;
+            boolean currPosIsPiece = (board[x][y] == currPiece);
+            // System.out.println("-------------");
+            // System.out.print(x + " ");
+            // System.out.print(y + " ");
+            // System.out.print(currPosIsPiece + " ");
+            won = won && currPosIsPiece;
+          }
+          if (won) {
+            System.out.println("GAME WON!");
+            gameWon = true;
+            return gameWon;
+          }
+
         }
       }
-      for(int m = 0; m < 8; ++m) {
-        if (boardXArray[winCombos[m][0]] && boardXArray[winCombos[m][1]] && boardXArray[winCombos[m][2]]) {
-          gameWon = true;
-        }
-        else if (boardOArray[winCombos[m][0]] && boardOArray[winCombos[m][1]] && boardOArray[winCombos[m][2]]) {
-          gameWon = true;
+
+      // checks for at least one more empty space
+      boolean atLeastOneEmpty = false;
+      for (int i = 0; i < 9; ++i) {
+        int x = i / 3;
+        int y = i % 3;
+        if (board[x][y] == GameHandler.PIECE.N) {
+          atLeastOneEmpty = atLeastOneEmpty || true;
         }
       }
+
+      gameWon = !atLeastOneEmpty;
+
       return gameWon;
+    }
+
+    public void broadCastWin() {
+      for (int i = 0; i < 2; ++i) {
+        try {
+          if (i == 0) {
+            playerOout.println("GAME OVER");
+            sendBoard(playerOout);
+          } else {
+            playerXout.println("GAME OVER");
+            sendBoard(playerXout);
+          }
+        } catch (Exception e) {
+          System.out.println(e);
+        }
+      }
+
     }
 
     public void sendBoard(PrintWriter out) {
