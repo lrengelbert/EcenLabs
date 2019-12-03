@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b83a0f91-849c-4657-b52d-20a46fcd4ca2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/MP3/ServerProtocol.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MP3/KnockKnockProtocol.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/MP3/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MP3/AServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/server/Client.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Project/server/TTTServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Project/server/TTTServer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +26,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/MP3" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Project/server" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -41,18 +40,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Client">
-    <configuration name="AServer" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AServer" />
+  <component name="RunManager" selected="Application.TTTServer">
+    <configuration name="TTTCLient" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="TTTClient" />
       <module name="Labs" />
-      <option name="PROGRAM_PARAMETERS" value="4444" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/MP3" />
+      <option name="PROGRAM_PARAMETERS" value="localhost 8000" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/Project/server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Client" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="Client" />
+    <configuration name="TTTServer" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="TTTServer" />
       <module name="Labs" />
       <option name="PROGRAM_PARAMETERS" value="localhost 4444" />
       <method v="2">
@@ -70,8 +69,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Application.Client" />
-      <item itemvalue="Application.AServer" />
+      <item itemvalue="Application.TTTServer" />
+      <item itemvalue="Application.TTTCLient" />
       <item itemvalue="Compound.ServerClient" />
     </list>
   </component>

@@ -37,7 +37,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class Client {
+public class TTTClient {
   public static void main(String[] args) throws IOException {
 
     if (args.length != 2) {

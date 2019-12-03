@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Array;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -116,6 +117,10 @@ public class TTTServer {
 
         System.out.println("Valid move made!");
         myGame.makeMove(board_pos, myPiece);
+        boolean gameOver = myGame.checkWin();
+        if (gameOver){
+          System.out.println("GAME OVER");
+        }
         myGame.sendBoard(out);
 
       } catch (InterruptedException intEx) {
@@ -321,6 +326,45 @@ public class TTTServer {
       } else {
         return false;
       }
+    }
+
+    public boolean checkWin(){
+      int[][] winCombos ={{0, 1, 2},    //winning horizontally
+              {3, 4, 5},
+              {6, 7, 8},
+              {0, 3, 6},				//winning vertically
+              {1, 4, 7},
+              {2, 5, 8},
+              {0, 4, 8},				//winning diagonally
+              {6, 4, 2}};
+
+      boolean[] boardXArray = {false, false, false, false, false, false, false, false};
+      boolean[] boardOArray = {false, false, false, false, false, false, false, false};
+      boolean gameWon = false;
+      for (int i = 0 ; i < 9; ++i){
+
+        int q = 0;
+        for (int j = 0 ; j < 3; ++j){
+          for (int k = 0; k < 3; ++k){
+            if (board[j][k].equals("X")){
+              boardXArray[q] = true;
+            }
+            else if(board[j][k].equals("O")){
+              boardOArray[q] = true;
+            }
+            q = q + 1;
+          }
+        }
+      }
+      for(int m = 0; m < 8; ++m) {
+        if (boardXArray[winCombos[m][0]] && boardXArray[winCombos[m][1]] && boardXArray[winCombos[m][2]]) {
+          gameWon = true;
+        }
+        else if (boardOArray[winCombos[m][0]] && boardOArray[winCombos[m][1]] && boardOArray[winCombos[m][2]]) {
+          gameWon = true;
+        }
+      }
+      return gameWon;
     }
 
     public void sendBoard(PrintWriter out) {
